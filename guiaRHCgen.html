@@ -2152,7 +2152,9 @@ muito ruim. A função calcula a proporção de dados ausentes para cada
 variável, fornecendo um escore percentual que facilita a visualização do
 preenchimento dos dados, classificando cada variável de acordo com sua
 completude.</p>
-<p><strong><em>analise_qualidade_dos_dados( )</em></strong></p>
+<div id="analise_qualidade_dos_dados" class="section level3" number="5.1.1">
+<h3><span class="header-section-number">5.1.1</span>
+<strong><em>analise_qualidade_dos_dados( )</em></strong></h3>
 <p>Esta função calcula e avalia a completude de cada variável em um
 dataframe e gera um gráfico de barras horizontal. A completude é exibida
 junto com uma classificação baseada no escore de Romero &amp; Cunha.
@@ -2169,7 +2171,10 @@ variável <code>Ano_do_Banco</code>, que indica o ano de registro dos
 dados. Esse desdobramento temporal permite observar variações na
 qualidade do preenchimento dos dados ao longo dos anos, sendo
 especialmente útil para estudos longitudinais.</p>
-<p><strong><em>analise_completude_ano( )</em></strong></p>
+</div>
+<div id="analise_completude_ano" class="section level3" number="5.1.2">
+<h3><span class="header-section-number">5.1.2</span>
+<strong><em>analise_completude_ano( )</em></strong></h3>
 <p>Esta função calcula e avalia a completude de cada variável por ano,
 distribuindo a proporção de completude pela variável Ano_do_Banco. A
 completude é exibida junto com uma classificação baseada no escore de
@@ -2182,13 +2187,17 @@ Pública, v. 22, p. 673-681, 2006.”</p>
 # Use a função da seguinte forma:
 
 Nome_da_Sua_Tabela_de_Completud_ano &lt;- analise_completude_ano(dados_RHC_combinados)</code></pre>
-<p><strong><em>analise_qualidade_dos_dados( )</em></strong></p>
+</div>
+<div id="analise_qualidade_dos_dados-1" class="section level3" number="5.1.3">
+<h3><span class="header-section-number">5.1.3</span>
+<em>analise_qualidade_dos_dados( )</em></h3>
 <p>Esta função executa uma análise completa de qualidade dos dados,
 chamando várias funções que verificam completude, códigos inexistentes,
 idades inconsistentes, anos inconsistentes, datas inconsistentes e
 inconsistências entre câncer e sexo.</p>
 <pre class="r"><code># Exemplo de uso:
 # analise_qualidade_dos_dados(dados_RHC_combinados)</code></pre>
+</div>
 </div>
 <div id="verificação-de-inconsistências-nos-dados" class="section level2" number="5.2">
 <h2><span class="header-section-number">5.2</span> Verificação de
@@ -2216,7 +2225,9 @@ diagnósticos de câncer estejam condizentes com o sexo do paciente,
 conforme a CID-O. Estas funções são fundamentadas em critérios de
 referência de estudos sobre completude e consistência, assegurando dados
 íntegros para análise epidemiológica.</p>
-<p><strong><em>verificar_anos_inconsistentes( )</em></strong></p>
+<div id="verificar_anos_inconsistentes" class="section level3" number="5.2.1">
+<h3><span class="header-section-number">5.2.1</span>
+<em>verificar_anos_inconsistentes( )</em></h3>
 <p>Esta função verifica se há inconsistências na ordem cronológica dos
 anos fornecidos em um dataframe. As verificações incluem:</p>
 <p>“Ano_Primeiro_Diagnostico” deve ser igual ou posterior a
@@ -2233,7 +2244,10 @@ quantitativo e a proporção de inconsistências por verificação.</p>
 <pre class="r"><code># Escreva o nome do dataframe e execute a função. Se seu dataframe for &quot;dados_RHC_combinados&quot;, use a função como:
 
 resultados_anos_inconsistentes &lt;- verificar_anos_inconsistentes(dados_RHC_combinados)</code></pre>
-<p><strong><em>verificar_cancer_sexo_inconsistentes( )</em></strong></p>
+</div>
+<div id="verificar_cancer_sexo_inconsistentes" class="section level3" number="5.2.2">
+<h3><span class="header-section-number">5.2.2</span>
+<em>verificar_cancer_sexo_inconsistentes( )</em></h3>
 <p>Esta função verifica se os CID-O dos cânceres relacionados ao sexo
 estão de acordo com a variável “Sexo”. As verificações incluem:</p>
 <p>CID-O de cânceres femininos (C53, C54, C55, C56, C57, C51, C52) devem
@@ -2244,9 +2258,12 @@ proporção de inconsistências por verificação.</p>
 <pre class="r"><code># Escreva o nome do dataframe e execute a função. Se seu dataframe for &quot;dados_RHC_combinados&quot;, use a função como:
 
 resultados_cancer_sexo_inconsistentes &lt;- verificar_cancer_sexo_inconsistentes(dados_RHC_combinados)</code></pre>
-<p><strong><em>verificar_codigos_inconsistentes( )</em></strong> Esta
-função verifica se há códigos inconsistentes (campos preenchidos com
-códigos inexistentes na Ficha de Registro de Tumor ou com formatos
+</div>
+<div id="verificar_codigos_inconsistentes" class="section level3" number="5.2.3">
+<h3><span class="header-section-number">5.2.3</span>
+<em>verificar_codigos_inconsistentes( )</em></h3>
+<p>Esta função verifica se há códigos inconsistentes (campos preenchidos
+com códigos inexistentes na Ficha de Registro de Tumor ou com formatos
 incorretos de preenchimento) nas variáveis de um dataframe. As variáveis
 e seus códigos esperados são definidos dentro da função. A função
 retorna um dataframe com o quantitativo e a proporção de códigos
@@ -2254,7 +2271,10 @@ inconsistentes por variável.</p>
 <pre class="r"><code># Escreva o nome do dataframe e execute a função. Se seu dataframe for &quot;dados_RHC_combinados&quot;, use a função como:
 
 resultados_codigos_inconsistentes &lt;- verificar_codigos_inconsistentes(dados_RHC_combinados)</code></pre>
-<p><strong><em>verificar_datas_inconsistentes( )</em></strong></p>
+</div>
+<div id="verificar_datas_inconsistentes" class="section level3" number="5.2.4">
+<h3><span class="header-section-number">5.2.4</span>
+<em>verificar_datas_inconsistentes( )</em></h3>
 <p>Esta função verifica se há inconsistências na ordem cronológica das
 datas fornecidas em um dataframe. As verificações incluem:</p>
 <p>“Data_Diagnostico” deve ser posterior a “Data_Primeira_Consulta”</p>
@@ -2274,13 +2294,17 @@ considerada inconsistente.</p>
 <pre class="r"><code># Escreva o nome do dataframe e execute a função. Se seu dataframe for &quot;dados_RHC_combinados&quot;, use a função como:
 
 resultados_datas_inconsistentes &lt;- verificar_datas_inconsistentes(dados_RHC_combinados)</code></pre>
-<p><strong><em>verificar_idades_invalidas( )</em></strong></p>
+</div>
+<div id="verificar_idades_invalidas" class="section level3" number="5.2.5">
+<h3><span class="header-section-number">5.2.5</span>
+<em>verificar_idades_invalidas( )</em></h3>
 <p>Esta função verifica se há idades inválidas (menores que zero ou
 maiores que 150 anos) na coluna Idade de um dataframe. A função retorna
 um dataframe com o quantitativo e a proporção de idades inválidas.</p>
 <pre class="r"><code># Escreva o nome do dataframe e execute a função. Se seu dataframe for &quot;dados_RHC_combinados&quot;, use a função como:
 
 resultados_idades_invalidas &lt;- verificar_idades_invalidas(dados_RHC_combinados)</code></pre>
+</div>
 </div>
 </div>
 

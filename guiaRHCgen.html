@@ -2135,6 +2135,154 @@ TNM</td>
 </tbody>
 </table>
 </div>
+<div id="análise-de-qualidade-dos-dados" class="section level1" number="5">
+<h1><span class="header-section-number">5</span> Análise de qualidade
+dos dados:</h1>
+<div id="completude-dos-dados" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> Completude dos
+Dados</h2>
+<p>A função <code>analise_completude</code> foi projetada para medir e
+avaliar a completude das variáveis em um conjunto de dados, gerando uma
+tabela detalhada e um gráfico que auxiliam na análise da qualidade do
+banco de dados. A avaliação é baseada no critério de incompletude
+proposto por Romero &amp; Cunha, que define a incompletude como a
+proporção de informações ausentes ou ignoradas em campos específicos,
+categorizando-a em níveis de qualidade: excelente, bom, regular, ruim e
+muito ruim. A função calcula a proporção de dados ausentes para cada
+variável, fornecendo um escore percentual que facilita a visualização do
+preenchimento dos dados, classificando cada variável de acordo com sua
+completude.</p>
+<p><strong><em>analise_qualidade_dos_dados( )</em></strong></p>
+<p>Esta função calcula e avalia a completude de cada variável em um
+dataframe e gera um gráfico de barras horizontal. A completude é exibida
+junto com uma classificação baseada no escore de Romero &amp; Cunha.
+Referência: ROMERO, Dalia E.; CUNHA, Cynthia Braga da. Avaliação da
+qualidade das variáveis sócio-econômicas e demográficas dos óbitos de
+crianças menores de um ano registrados no Sistema de Informações sobre
+Mortalidade do Brasil (1996/2001). Cadernos de Saúde Pública, v. 22,
+p. 673-681, 2006.</p>
+<pre class="r"><code># Exemplo de uso:
+analise_qualidade_dos_dados(dados_RHC_combinados)</code></pre>
+<p>Além disso, a função <code>analise_completude_ano</code> expande essa
+análise ao considerar a completude de cada variável por ano, com base na
+variável <code>Ano_do_Banco</code>, que indica o ano de registro dos
+dados. Esse desdobramento temporal permite observar variações na
+qualidade do preenchimento dos dados ao longo dos anos, sendo
+especialmente útil para estudos longitudinais.</p>
+<p><strong><em>analise_completude_ano( )</em></strong></p>
+<p>Esta função calcula e avalia a completude de cada variável por ano,
+distribuindo a proporção de completude pela variável Ano_do_Banco. A
+completude é exibida junto com uma classificação baseada no escore de
+Romero &amp; Cunha. Referência: ROMERO, Dalia E.; CUNHA, Cynthia Braga
+da. Avaliação da qualidade das variáveis sócio-econômicas e demográficas
+dos óbitos de crianças menores de um ano registrados no Sistema de
+Informações sobre Mortalidade do Brasil (1996/2001). Cadernos de Saúde
+Pública, v. 22, p. 673-681, 2006.”</p>
+<pre class="r"><code># Supondo que você tenha um dataframe chamado dados_RHC_combinados,
+# Use a função da seguinte forma:
+
+Nome_da_Sua_Tabela_de_Completud_ano &lt;- analise_completude_ano(dados_RHC_combinados)</code></pre>
+<p><strong><em>analise_qualidade_dos_dados( )</em></strong></p>
+<p>Esta função executa uma análise completa de qualidade dos dados,
+chamando várias funções que verificam completude, códigos inexistentes,
+idades inconsistentes, anos inconsistentes, datas inconsistentes e
+inconsistências entre câncer e sexo.</p>
+<pre class="r"><code># Exemplo de uso:
+# analise_qualidade_dos_dados(dados_RHC_combinados)</code></pre>
+</div>
+<div id="verificação-de-inconsistências-nos-dados" class="section level2" number="5.2">
+<h2><span class="header-section-number">5.2</span> Verificação de
+Inconsistências nos Dados</h2>
+<p>A análise de inconsistências nos dados de registros hospitalares de
+câncer visa garantir a confiabilidade dos dados para pesquisa. A função
+<code>verificar_codigos_inconsistentes</code> identifica códigos
+incorretos ou inexistentes e retorna o número e a proporção desses
+códigos inconsistentes em cada variável. Já a função
+<code>verificar_idades_inconsistentes</code> verifica a plausibilidade
+das idades registradas, considerando inconsistentes idades menores que
+zero ou maiores que 150 anos. Ambas as funções calculam a proporção de
+inconsistências como uma porcentagem dos dados válidos, facilitando a
+interpretação dos resultados.</p>
+<p>Para dados temporais, a função
+<code>verificar_anos_inconsistentes</code> assegura a coerência
+cronológica de eventos como diagnóstico, triagem, consulta inicial e
+início do tratamento, gerando uma tabela com o número de inconsistências
+para cada verificação cronológica. Similarmente,
+<code>verificar_datas_inconsistentes</code> verifica a ordem lógica das
+datas e aplica uma margem de 12 meses entre eventos como diagnóstico e
+tratamento. Além disso, a função
+<code>verificar_cancer_sexo_inconsistentes</code> assegura que os
+diagnósticos de câncer estejam condizentes com o sexo do paciente,
+conforme a CID-O. Estas funções são fundamentadas em critérios de
+referência de estudos sobre completude e consistência, assegurando dados
+íntegros para análise epidemiológica.</p>
+<p><strong><em>verificar_anos_inconsistentes( )</em></strong></p>
+<p>Esta função verifica se há inconsistências na ordem cronológica dos
+anos fornecidos em um dataframe. As verificações incluem:</p>
+<p>“Ano_Primeiro_Diagnostico” deve ser igual ou posterior a
+“Ano_Primeira_Consulta”</p>
+<p>“Ano_Primeiro_Diagnostico” deve ser igual ou posterior a
+“Ano_Triagem”</p>
+<p>“Ano_Inicio_Tratamento” deve ser igual ou posterior a
+“Ano_Primeira_Consulta”</p>
+<p>“Ano_Inicio_Tratamento” deve ser igual ou posterior a
+“Ano_Triagem”</p>
+<p>“Ano_Inicio_Tratamento” deve ser igual ou posterior a
+“Ano_Primeiro_Diagnostico” A função retorna um dataframe com o
+quantitativo e a proporção de inconsistências por verificação.</p>
+<pre class="r"><code># Escreva o nome do dataframe e execute a função. Se seu dataframe for &quot;dados_RHC_combinados&quot;, use a função como:
+
+resultados_anos_inconsistentes &lt;- verificar_anos_inconsistentes(dados_RHC_combinados)</code></pre>
+<p><strong><em>verificar_cancer_sexo_inconsistentes( )</em></strong></p>
+<p>Esta função verifica se os CID-O dos cânceres relacionados ao sexo
+estão de acordo com a variável “Sexo”. As verificações incluem:</p>
+<p>CID-O de cânceres femininos (C53, C54, C55, C56, C57, C51, C52) devem
+corresponder ao sexo “Feminino”</p>
+<p>CID-O de cânceres masculinos (C60, C61, C62) devem corresponder ao
+sexo “Masculino” A função retorna um dataframe com o quantitativo e a
+proporção de inconsistências por verificação.</p>
+<pre class="r"><code># Escreva o nome do dataframe e execute a função. Se seu dataframe for &quot;dados_RHC_combinados&quot;, use a função como:
+
+resultados_cancer_sexo_inconsistentes &lt;- verificar_cancer_sexo_inconsistentes(dados_RHC_combinados)</code></pre>
+<p><strong><em>verificar_codigos_inconsistentes( )</em></strong> Esta
+função verifica se há códigos inconsistentes (campos preenchidos com
+códigos inexistentes na Ficha de Registro de Tumor ou com formatos
+incorretos de preenchimento) nas variáveis de um dataframe. As variáveis
+e seus códigos esperados são definidos dentro da função. A função
+retorna um dataframe com o quantitativo e a proporção de códigos
+inconsistentes por variável.</p>
+<pre class="r"><code># Escreva o nome do dataframe e execute a função. Se seu dataframe for &quot;dados_RHC_combinados&quot;, use a função como:
+
+resultados_codigos_inconsistentes &lt;- verificar_codigos_inconsistentes(dados_RHC_combinados)</code></pre>
+<p><strong><em>verificar_datas_inconsistentes( )</em></strong></p>
+<p>Esta função verifica se há inconsistências na ordem cronológica das
+datas fornecidas em um dataframe. As verificações incluem:</p>
+<p>“Data_Diagnostico” deve ser posterior a “Data_Primeira_Consulta”</p>
+<p>“Data_Diagnostico” deve ser posterior a “Data_Triagem”</p>
+<p>“Data_Inicio_Primeiro_Tratamento” deve ser posterior a
+“Data_Primeira_Consulta”</p>
+<p>“Data_Inicio_Primeiro_Tratamento” deve ser posterior a
+“Data_Triagem”</p>
+<p>“Data_Inicio_Primeiro_Tratamento” deve ser posterior a
+“Data_Diagnostico”</p>
+<p>“Data_Obito” deve ser posterior a “Data_Primeira_Consulta”</p>
+<p>“Data_Obito” deve ser posterior a “Data_Triagem”</p>
+<p>“Data_Obito” deve ser posterior a “Data_Diagnostico”</p>
+<p>“Data_Obito” deve ser posterior a “Data_Inicio_Primeiro_Tratamento” A
+função considera uma diferença mínima de 12 meses (365 dias) para ser
+considerada inconsistente.</p>
+<pre class="r"><code># Escreva o nome do dataframe e execute a função. Se seu dataframe for &quot;dados_RHC_combinados&quot;, use a função como:
+
+resultados_datas_inconsistentes &lt;- verificar_datas_inconsistentes(dados_RHC_combinados)</code></pre>
+<p><strong><em>verificar_idades_invalidas( )</em></strong></p>
+<p>Esta função verifica se há idades inválidas (menores que zero ou
+maiores que 150 anos) na coluna Idade de um dataframe. A função retorna
+um dataframe com o quantitativo e a proporção de idades inválidas.</p>
+<pre class="r"><code># Escreva o nome do dataframe e execute a função. Se seu dataframe for &quot;dados_RHC_combinados&quot;, use a função como:
+
+resultados_idades_invalidas &lt;- verificar_idades_invalidas(dados_RHC_combinados)</code></pre>
+</div>
+</div>
 
 
 
